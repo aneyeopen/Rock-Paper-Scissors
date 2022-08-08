@@ -1,6 +1,6 @@
-const rock = 1;
-const paper = 2;
-const scissors = 3;
+const win = 1;
+const loss = 2;
+const tie = 3;
 const playerChoice = "scISSOrs";
 const oppChoice = getComputerChoice();
 
@@ -25,25 +25,25 @@ function oneRound(oppChoice, playerChoice) {
 
     if (choice === oppChoice) {
         console.log('Tie game! Everyone wins.');
-        return 3;
+        return tie;
     } else if (choice === 1 && oppChoice === 3) {
         console.log("You Win! Rock beats Scissors");
-        return 1;
+        return win;
     } else if (choice === 1 && oppChoice === 2) {
         console.log("You Lose! Paper beats Rock");
-        return 2;
+        return loss;
     } else if (choice === 2 && oppChoice === 1) {
         console.log("You Win! Paper beats Rock");
-        return 1;
+        return win;
     } else if (choice === 2 && oppChoice === 3) {
         console.log("You Lose! Scissors beats Paper");
-        return 2;
+        return loss;
     } else if (choice === 3 && oppChoice === 2) {
         console.log("You Win! Scissors beats Paper");
-        return 1;
+        return win;
     } else if (choice === 3 && oppChoice === 1) {
         console.log("You Lose! Rock beats Scissors");
-        return 2;
+        return loss;
     } else {
         return null;
     }
@@ -61,9 +61,9 @@ function game() {
         while (winCount < 3 && lossCount < 3) { 
             player = window.prompt("Rock, paper or scissors?");
             roundResult = oneRound(getComputerChoice(), player);
-            if (roundResult === 3) {
+            if (roundResult === tie) {
                 i -= 1;
-            } else if (roundResult === 1) {
+            } else if (roundResult === win) {
                 winCount += 1;
             } else {
                 lossCount += 1;
