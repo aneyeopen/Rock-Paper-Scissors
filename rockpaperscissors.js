@@ -24,22 +24,59 @@ function oneRound(oppChoice, playerChoice) {
     }
 
     if (choice === oppChoice) {
-        return 'Tie game! No one wins.';
+        console.log('Tie game! Everyone wins.');
+        return 3;
     } else if (choice === 1 && oppChoice === 3) {
-        return "You Win! Rock beats Scissors";
+        console.log("You Win! Rock beats Scissors");
+        return 1;
     } else if (choice === 1 && oppChoice === 2) {
-        return "You Lose! Paper beats Rock";
+        console.log("You Lose! Paper beats Rock");
+        return 2;
     } else if (choice === 2 && oppChoice === 1) {
-        return "You Win! Paper beats Rock";
+        console.log("You Win! Paper beats Rock");
+        return 1;
     } else if (choice === 2 && oppChoice === 3) {
-        return "You Lose! Scissors beats Paper";
+        console.log("You Lose! Scissors beats Paper");
+        return 2;
     } else if (choice === 3 && oppChoice === 2) {
-        return "You Win! Scissors beats Paper";
-    } else if (choice === 2 && oppChoice === 3) {
-        return "You Lose! Rock beats Scissors";
+        console.log("You Win! Scissors beats Paper");
+        return 1;
+    } else if (choice === 3 && oppChoice === 1) {
+        console.log("You Lose! Rock beats Scissors");
+        return 2;
     } else {
-        return "You didn't input correctly, you're an idiot!";
+        return null;
     }
 
 }
 console.log(oneRound(getComputerChoice(), playerChoice));
+
+function game() {
+    let winCount = 0;
+    let lossCount = 0;
+    let roundResult = 0;
+    let player = 0;
+       
+    for (let i = 0; i < 5; i++) {
+        while (winCount < 3 && lossCount < 3) { 
+            player = window.prompt("Rock, paper or scissors?");
+            roundResult = oneRound(getComputerChoice(), player);
+            if (roundResult === 3) {
+                i -= 1;
+            } else if (roundResult === 1) {
+                winCount += 1;
+            } else {
+                lossCount += 1;
+            }
+            console.log(winCount);
+            console.log(lossCount); 
+        }
+    }
+    if (winCount === 3) {
+        return "You win, you beat the computer";
+    } else {
+        return "You lost, that's embarrassing!";
+    }
+}
+
+console.log(game());
