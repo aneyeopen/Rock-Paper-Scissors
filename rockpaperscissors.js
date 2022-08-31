@@ -49,7 +49,6 @@ function oneRound(oppChoice, playerChoice) {
     }
 
 }
-console.log(oneRound(getComputerChoice(), playerChoice));
 
 function game() {
     let winCount = 0;
