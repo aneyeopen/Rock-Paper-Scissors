@@ -1,12 +1,13 @@
-const win = 1;
-const loss = 2;
-const tie = 3;
-const playerChoice = "scISSOrs";
-const oppChoice = getComputerChoice();
+
+
+
+
 
 function getComputerChoice() {
     return Math.floor(Math.random()*3+1);
 }
+
+
 
 
 function oneRound(oppChoice, playerChoice) {
@@ -24,25 +25,25 @@ function oneRound(oppChoice, playerChoice) {
     }
 
     if (choice === oppChoice) {
-        console.log('Tie game! Everyone wins.');
+        document.getElementById("text").innerHTML = 'Tie game! Noone wins.'
         return tie;
     } else if (choice === 1 && oppChoice === 3) {
-        console.log("You Win! Rock beats Scissors");
+        document.getElementById("text").innerHTML = "You Win! Rock beats Scissors";
         return win;
     } else if (choice === 1 && oppChoice === 2) {
-        console.log("You Lose! Paper beats Rock");
+        document.getElementById("text").innerHTML = "You Lose! Paper beats Rock";
         return loss;
     } else if (choice === 2 && oppChoice === 1) {
-        console.log("You Win! Paper beats Rock");
+        document.getElementById("text").innerHTML = "You Win! Paper beats Rock";
         return win;
     } else if (choice === 2 && oppChoice === 3) {
-        console.log("You Lose! Scissors beats Paper");
+        document.getElementById("text").innerHTML = "You Lose! Scissors beats Paper";
         return loss;
     } else if (choice === 3 && oppChoice === 2) {
-        console.log("You Win! Scissors beats Paper");
+        document.getElementById("text").innerHTML = "You Win! Scissors beats Paper";
         return win;
     } else if (choice === 3 && oppChoice === 1) {
-        console.log("You Lose! Rock beats Scissors");
+        document.getElementById("text").innerHTML = "You Lose! Rock beats Scissors";
         return loss;
     } else {
         return null;
@@ -50,7 +51,7 @@ function oneRound(oppChoice, playerChoice) {
 
 }
 
-function game() {
+/*function game() {
     let winCount = 0;
     let lossCount = 0;
     let roundResult = 0;
@@ -78,4 +79,83 @@ function game() {
     }
 }
 
-console.log(game());
+console.log(game()); */
+
+const win = 1;
+const loss = 2;
+const tie = 3;
+const playerChoice = "scISSOrs";
+const oppChoice = getComputerChoice();
+
+let winCount = 0;
+let lossCount = 0;
+let gameCount = 0;
+
+const rockButton = document.getElementById('rock');
+const paperButton = document.getElementById('paper');
+const scissorsButton = document.getElementById('scissors');
+
+function gameCheck(winCount, lossCount) {
+    if (winCount === 3) {
+        textElement.innerHTML = "You win, you beat the computer";
+        gameCount += 1;
+        winCount = 0;
+        lossCount = 0;
+        updateScore(winCount, lossCount, gameCount);
+    
+    }else if (lossCount === 3) {
+        textElement.innerHTML = "You lost, that's embarrassing!";
+        winCount = 0;
+        lossCount = 0;
+        updateScore(winCount, lossCount, gameCount);
+} else return;
+}
+
+function updateScore(wins, losses, games) {
+    document.getElementById("winCount").innerHTML = `Wins: ${wins}`;
+    document.getElementById("lossCount").innerHTML = `Losses: ${losses}`;
+    document.getElementById("gameCount").innerHTML = `Games: ${games}`;
+}
+
+function roundScoring(decision, wins, losses) {
+    roundResult = oneRound(getComputerChoice(), decision);
+    if (roundResult === win) {
+        winCount += 1;
+        updateScore(winCount, lossCount, gameCount);
+        if (winCount === 3) {
+            textElement.innerHTML = "You win, you beat the computer";
+            gameCount += 1;
+            winCount = 0;
+            lossCount = 0;
+        } else return;
+        
+    } else if (roundResult === loss) {
+        lossCount += 1;
+        updateScore(winCount, lossCount, gameCount);
+        if (lossCount === 3) {
+            textElement.innerHTML = "You lost, that's embarrassing!";
+            winCount = 0;
+            lossCount = 0;
+            updateScore(winCount, lossCount, gameCount);
+        } else return;
+        
+    } 
+    else return;
+    
+} 
+
+
+const textElement = document.getElementById("text");
+
+if (winCount === 0 && lossCount === 0) {
+    textElement.innerHTML = "Make your choice to start the game";
+}
+
+updateScore(winCount, lossCount, gameCount);
+
+
+    rockButton.addEventListener('click', (event) => {roundScoring("rock", winCount, lossCount)});
+    paperButton.addEventListener('click', (event) => {roundScoring("paper", winCount, lossCount)});
+    scissorsButton.addEventListener('click', (event) => {roundScoring("scissors", winCount, lossCount)});
+ 
+

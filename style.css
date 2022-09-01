@@ -29,7 +29,7 @@ body {
     gap: 200px;
 }
 
-.winCount, .lossCount, .gameCount {
+#winCount, #lossCount, #gameCount {
     margin-top: 30px;
     font-size: 36px;
 }
